@@ -14,26 +14,26 @@
 | __*Misc. Blog*__ | Miscellaneous thoughts |
 
 ***
-###CV
+### CV
 
 MY CV
 
 ***
-###Skills
+### Skills
 
 MY SKILLS
 
 ***
-###Employment & Experience
+### Employment & Experience
 
 MY EXPERIENCE
 
 ***
-###Sport
+### Sport
 
 MY SPORTS
 
 ***
-###Design
+### Design
 
 MY DESIGNS
