@@ -6,7 +6,7 @@
 
 ### Contents
 
-| [__*CV*__](https://john-savill.github.io/###CV) | Current and former CVs |
+| [__*CV*__](https://john-savill.github.io/cd.md) | Current and former CVs |
 | __*Skills*__ | Lists my technical and soft skills |
 | __*Employment & Experience*__ | Details about projects |
 | __*Sport*__ | Sport achievements |
