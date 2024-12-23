@@ -1,7 +1,5 @@
 
-# John Savill
-## About me
-
+# John Savill ## About me
 ***
 
 ### Contents
