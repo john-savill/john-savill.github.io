@@ -9,31 +9,9 @@
 | [__*CV*__](https://john-savill.github.io/cv) | Current and former CVs |
 | [__*Skills*__](https://john-savill.github.io/skills)| Lists my technical and soft skills |
 | [__*Employment & Experience*__](https://john-savill.github.io/experience) | Details about projects |
-| [__*Sport*__](https://john-savill.github.io/sport) | Sport achievements |
-| __*Design*__ | Some art & design |
-| __*Misc. Blog*__ | Miscellaneous thoughts |
+| [__*Sport*__](https://john-savill.github.io/sports) | Sport achievements |
+| ==__*Design*__== | Some art & design |
+| ==__*Misc. Blog*__== | Miscellaneous thoughts |
 
-***
-### CV
-
-MY CV
-
-***
-### Skills
-
-MY SKILLS
-
-***
-### Employment & Experience
-
-MY EXPERIENCE
-
-***
-### Sport
-
-MY SPORTS
-
-***
-### Design
-
-MY DESIGNS
+##Contact
+jsavill96@gmail.com
