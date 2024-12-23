@@ -1,1 +1,5 @@
+---
+title: Title
+---
+
 "Hello world"
