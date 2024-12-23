@@ -1,13 +1,11 @@
----
 
 # John Savill
 ## About me
 
----
+***
 
 ### Contents
 
-| | |
 | __*CV*__ | Current and former CVs |
 | __*Skills*__ | Lists my technical and soft skills |
 | __*Employment & Experience*__ | Details about projects |
