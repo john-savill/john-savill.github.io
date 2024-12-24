@@ -1,5 +1,7 @@
 ***
 ## Skills
+// A list of skills I have learned and a little detail about them
+***
 
 ### Hard/Technical skills:
 
