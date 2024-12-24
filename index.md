@@ -14,4 +14,4 @@
 | ~~Misc. Blog~~ | ~~Miscellaneous thoughts~~ |
 
 ## Contact
-jsavill96@gmail.com
+<jsavill96@gmail.com>
