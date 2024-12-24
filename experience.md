@@ -1,6 +1,7 @@
 ***
 ## Employment & Experience
 // Details on the skills I have learned and the projects I have worked on
+
 ***
 
 Since graduating from Loughborough University in 2021 I have worked at IDIADA Automotive UK as a software engineer. At IDIADA I have worked on two main types of projects: Industry research and development projects that are more creative and skill based, and customer focussed work that is more about problem solving, meeting targets and results orientated.
