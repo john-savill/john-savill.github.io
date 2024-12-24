@@ -13,5 +13,7 @@
 | ~~Design~~ | ~~Some art & design~~ |
 | ~~Misc. Blog~~ | ~~Miscellaneous thoughts~~ |
 
+[## Gallery](gallery.html)
+
 ## Contact
 <jsavill96@gmail.com>
