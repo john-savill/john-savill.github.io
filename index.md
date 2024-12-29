@@ -1,6 +1,6 @@
 
 # John Savill 
-*A little about me written in bare-bones markdown & HTML*
+*A little detail about me written in simple markdown & HTML*
 
 ***
 
