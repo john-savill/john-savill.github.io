@@ -10,11 +10,9 @@
 | [___Skills___](https://john-savill.github.io/skills)| Lists my technical and soft skills |
 | [___Employment & Experience___](https://john-savill.github.io/experience) | Details about projects |
 | [___Sport___](https://john-savill.github.io/sports) | Sport achievements |
-| [___Gallery___](gallery.html) | Employment and sports photos |
+| [___Gallery___](rotategallery.html) | Project photos |
 | ~~Design~~ | ~~Some art & design~~ |
 | ~~Misc. Blog~~ | ~~Miscellaneous thoughts~~ |
-
-[testgallery](rotategallery.html)
 
 ## Contact
 <jsavill96@gmail.com>
