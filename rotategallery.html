@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Rotating Image Gallery</title>
+	<style>
+    	.gallery-container {
+        	position: relative;
+        	max-width: 800px;
+        	margin: 0 auto;
+        	overflow: hidden;
+    	}
+ 
+    	.gallery {
+        	display: flex;
+        	transition: transform 0.5s ease-in-out;
+    	}
+ 
+    	.gallery-item {
+        	min-width: 100%;
+        	box-sizing: border-box;
+    	}
+ 
+    	.gallery-item img {
+        	width: 100%;
+        	height: auto;
+    	}
+ 
+    	.gallery-nav {
+        	position: absolute;
+        	top: 50%;
+        	transform: translateY(-50%);
+        	width: 100%;
+        	display: flex;
+        	justify-content: space-between;
+        	padding: 0 20px;
+        	box-sizing: border-box;
+    	}
+ 
+    	.nav-button {
+        	background-color: rgba(255, 255, 255, 0.7);
+        	border: none;
+        	padding: 10px 15px;
+        	cursor: pointer;
+        	border-radius: 5px;
+    	}
+ 
+    	.dots-container {
+        	display: flex;
+        	justify-content: center;
+        	margin-top: 10px;
+    	}
+ 
+    	.dot {
+        	width: 10px;
+        	height: 10px;
+        	border-radius: 50%;
+        	background-color: #ccc;
+        	margin: 0 5px;
+        	cursor: pointer;
+    	}
+ 
+    	.dot.active {
+        	background-color: #333;
+    	}
+	</style>
+</head>
+<body>
+	<div class="gallery-container">
+    	<div class="gallery">
+        	<div class="gallery-item">
+            	<img src="image1.jpg" alt="Image 1">
+        	</div>
+        	<div class="gallery-item">
+            	<img src="image2.jpg" alt="Image 2">
+        	</div>
+        	<div class="gallery-item">
+            	<img src="image3.jpg" alt="Image 3">
+        	</div>
+    	</div>
+    	<div class="gallery-nav">
+        	<button class="nav-button prev">&lt;</button>
+        	<button class="nav-button next">&gt;</button>
+    	</div>
+    	<div class="dots-container"></div>
+	</div>
+ 
+	<script>
+    	const gallery = document.querySelector('.gallery');
+    	const items = document.querySelectorAll('.gallery-item');
+    	const prevButton = document.querySelector('.prev');
+    	const nextButton = document.querySelector('.next');
+    	const dotsContainer = document.querySelector('.dots-container');
+ 
+    	let currentIndex = 0;
+    	const totalItems = items.length;
+ 
+    	// Create dots
+    	items.forEach((_, index) => {
+        	const dot = document.createElement('div');
+        	dot.classList.add('dot');
+        	if (index === 0) dot.classList.add('active');
+        	dot.addEventListener('click', () => goToSlide(index));
+        	dotsContainer.appendChild(dot);
+    	});
+ 
+    	const dots = document.querySelectorAll('.dot');
+ 
+    	// Auto rotate every 5 seconds
+    	let autoRotate = setInterval(nextSlide, 5000);
+ 
+    	function updateDots() {
+        	dots.forEach(dot => dot.classList.remove('active'));
+        	dots[currentIndex].classList.add('active');
+    	}
+ 
+    	function goToSlide(index) {
+        	currentIndex = index;
+        	const translateX = -currentIndex * 100;
+        	gallery.style.transform = `translateX(${translateX}%)`;
+        	updateDots();
+        	resetAutoRotate();
+    	}
+ 
+    	function nextSlide() {
+        	currentIndex = (currentIndex + 1) % totalItems;
+        	goToSlide(currentIndex);
+    	}
+ 
+    	function prevSlide() {
+        	currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        	goToSlide(currentIndex);
+    	}
+ 
+    	function resetAutoRotate() {
+        	clearInterval(autoRotate);
+        	autoRotate = setInterval(nextSlide, 5000);
+    	}
+ 
+    	// Event listeners
+    	prevButton.addEventListener('click', prevSlide);
+    	nextButton.addEventListener('click', nextSlide);
+ 
+    	// Reset auto-rotation when user interacts with the gallery
+    	gallery.addEventListener('mouseenter', () => clearInterval(autoRotate));
+    	gallery.addEventListener('mouseleave', () => {
+        	autoRotate = setInterval(nextSlide, 5000);
+    	});
+	</script>
+</body>
+</html>
