@@ -14,5 +14,7 @@
 | ~~Design~~ | ~~Some art & design~~ |
 | ~~Misc. Blog~~ | ~~Miscellaneous thoughts~~ |
 
+[testgallery](rotategallery.html)
+
 ## Contact
 <jsavill96@gmail.com>
