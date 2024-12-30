@@ -13,7 +13,6 @@
 | [___Work Gallery___](rotategallery.html) | Project photos |
 | [___Sport Gallery___](rotatesportgallery.html) | Sport photos |
 | ~~Design~~ | ~~Some art & design~~ |
-| ~~Misc. Blog~~ | ~~Miscellaneous thoughts~~ |
 
 ## Contact
 <jsavill96@gmail.com>
