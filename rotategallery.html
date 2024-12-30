@@ -3,12 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Rotating Image Gallery</title>
+	<title>Random Rotating Image Gallery</title>
 	<style>
     	.gallery-container {
         	position: relative;
-        	max-width: 600px;
-		max-height: 600px; 
+        	max-width: 800px;
         	margin: 0 auto;
         	overflow: hidden;
     	}
@@ -69,44 +68,44 @@
 </head>
 <body>
 	<div class="gallery-container">
-    	<div class="gallery">
+    	<div class="gallery" id="gallery">
         	<div class="gallery-item">
-            	<img src="Media/autocheri1.JPG" alt="Image 1">
-        	</div>
-        	<div class="gallery-item">
-            	<img src="Media/autocheri2.JPG" alt="Image 2">
+            		<img src="Media/autocheri1.JPG" alt="Image 1">
         	</div>
         	<div class="gallery-item">
-            	<img src="Media/autocheri3.JPG" alt="Image 3">
+            		<img src="Media/autocheri2.JPG" alt="Image 2">
         	</div>
-		<div class="gallery-item">
-            	<img src="Media/autocheri4.png" alt="Image 4">
+        	<div class="gallery-item">
+            		<img src="Media/autocheri3.JPG" alt="Image 3">
         	</div>
-		<div class="gallery-item">
-            	<img src="Media/eratos1.JPG" alt="Image 5">
+    		<div class="gallery-item">
+            		<img src="Media/autocheri4.png" alt="Image 4">
         	</div>
-		<div class="gallery-item">
-            	<img src="Media/eratos2.JPG" alt="Image 6">
+    		<div class="gallery-item">
+            		<img src="Media/eratos1.JPG" alt="Image 5">
         	</div>
-		<div class="gallery-item">
-            	<img src="Media/eratos3.jpg" alt="Image 7">
+    		<div class="gallery-item">
+            		<img src="Media/eratos2.JPG" alt="Image 6">
         	</div>
-		<div class="gallery-item">
-            	<img src="Media/eratos4.jpg" alt="Image 8">
+    		<div class="gallery-item">
+            		<img src="Media/eratos3.jpg" alt="Image 7">
         	</div>
-		<div class="gallery-item">
-            	<img src="Media/eratos5.jpg" alt="Image 9">
+    		<div class="gallery-item">
+            		<img src="Media/eratos4.jpg" alt="Image 8">
         	</div>
-		<div class="gallery-item">
-            	<img src="Media/eratos6.jpg" alt="Image 10">
+    		<div class="gallery-item">
+            		<img src="Media/eratos5.jpg" alt="Image 9">
         	</div>
-		<div class="gallery-item">
-            	<img src="Media/eratos7.jpg" alt="Image 11">
+    		<div class="gallery-item">
+            		<img src="Media/eratos6.jpg" alt="Image 10">
         	</div>
-		<div class="gallery-item">
-            	<img src="Media/eratos8.jpg" alt="Image 12">
+    		<div class="gallery-item">
+            		<img src="Media/eratos7.jpg" alt="Image 11">
         	</div>
-    	</div>
+    		<div class="gallery-item">
+            		<img src="Media/eratos8.jpg" alt="Image 12">
+        	</div>
+    		</div>
     	<div class="gallery-nav">
         	<button class="nav-button prev">&lt;</button>
         	<button class="nav-button next">&gt;</button>
@@ -115,17 +114,36 @@
 	</div>
  
 	<script>
+    	// Function to shuffle array (Fisher-Yates algorithm)
+    	function shuffleArray(array) {
+        	for (let i = array.length - 1; i > 0; i--) {
+            	const j = Math.floor(Math.random() * (i + 1));
+            	[array[i], array[j]] = [array[j], array[i]];
+        	}
+        	return array;
+    	}
+ 
+    	// Get gallery and items
     	const gallery = document.querySelector('.gallery');
-    	const items = document.querySelectorAll('.gallery-item');
+    	const items = Array.from(document.querySelectorAll('.gallery-item'));
     	const prevButton = document.querySelector('.prev');
     	const nextButton = document.querySelector('.next');
     	const dotsContainer = document.querySelector('.dots-container');
  
+    	// Shuffle the gallery items
+    	const shuffledItems = shuffleArray([...items]);
+        
+    	// Clear gallery and append shuffled items
+    	gallery.innerHTML = '';
+    	shuffledItems.forEach(item => {
+        	gallery.appendChild(item);
+    	});
+ 
     	let currentIndex = 0;
-    	const totalItems = items.length;
+    	const totalItems = shuffledItems.length;
  
     	// Create dots
-    	items.forEach((_, index) => {
+    	shuffledItems.forEach((_, index) => {
         	const dot = document.createElement('div');
         	dot.classList.add('dot');
         	if (index === 0) dot.classList.add('active');
@@ -165,6 +183,29 @@
         	clearInterval(autoRotate);
         	autoRotate = setInterval(nextSlide, 5000);
     	}
+ 
+    	// Add button to reshuffle gallery
+    	const shuffleButton = document.createElement('button');
+    	shuffleButton.textContent = 'Shuffle Gallery';
+    	shuffleButton.style.display = 'block';
+    	shuffleButton.style.margin = '10px auto';
+    	shuffleButton.style.padding = '10px 20px';
+    	document.querySelector('.gallery-container').after(shuffleButton);
+ 
+    	shuffleButton.addEventListener('click', () => {
+        	// Shuffle items
+        	const newShuffledItems = shuffleArray([...shuffledItems]);
+            
+        	// Clear and rebuild gallery
+        	gallery.innerHTML = '';
+        	newShuffledItems.forEach(item => {
+            	gallery.appendChild(item);
+        	});
+            
+        	// Reset to first slide
+        	currentIndex = 0;
+        	goToSlide(0);
+    	});
  
     	// Event listeners
     	prevButton.addEventListener('click', prevSlide);
