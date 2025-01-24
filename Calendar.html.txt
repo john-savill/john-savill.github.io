@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Calendar with Events</title>
+    <style>
+        .calendar {
+            font-family: Arial, sans-serif;
+            width: 800px;
+            margin: 20px auto;
+            display: flex;
+        }
+        .calendar-container {
+            width: 400px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+        }
+        .day-name {
+            background-color: #e0e0e0;
+            padding: 5px;
+        }
+        .date {
+            padding: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+        .date:hover {
+            background-color: #f0f0f0;
+        }
+        .current {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .has-event {
+            background-color: #fff3cd;
+        }
+        .has-event::after {
+            content: '•';
+            color: #ff4444;
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+        }
+        .event-panel {
+            width: 400px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .event-form {
+            margin-top: 20px;
+        }
+        .event-list {
+            margin-top: 20px;
+        }
+        .event-item {
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+        input, textarea {
+            width: 100%;
+            margin: 5px 0;
+            padding: 5px;
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-btn {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 2px 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar">
+        <div class="calendar-container">
+            <div class="header">
+                <button onclick="previousMonth()">&lt;</button>
+                <h2 id="monthDisplay"></h2>
+                <button onclick="nextMonth()">&gt;</button>
+            </div>
+            <div class="days" id="daysContainer">
+                <div class="day-name">Sun</div>
+                <div class="day-name">Mon</div>
+                <div class="day-name">Tue</div>
+                <div class="day-name">Wed</div>
+                <div class="day-name">Thu</div>
+                <div class="day-name">Fri</div>
+                <div class="day-name">Sat</div>
+            </div>
+        </div>
+        <div class="event-panel">
+            <h3 id="selectedDateDisplay">No date selected</h3>
+            <div class="event-form">
+                <input type="text" id="eventTitle" placeholder="Event Title">
+                <textarea id="eventDescription" placeholder="Event Description"></textarea>
+                <input type="time" id="eventTime">
+                <button onclick="addEvent()">Add Event</button>
+            </div>
+            <div class="event-list" id="eventList"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+        let selectedDate = null;
+        let events = JSON.parse(localStorage.getItem('calendarEvents')) || {};
+
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+
+        function showCalendar(month, year) {
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const startingDay = firstDay.getDay();
+            const monthLength = lastDay.getDate();
+
+            const monthDisplay = document.getElementById('monthDisplay');
+            const daysContainer = document.getElementById('daysContainer');
+
+            // Clear previous dates
+            while (daysContainer.children.length > 7) {
+                daysContainer.removeChild(daysContainer.lastChild);
+            }
+
+            monthDisplay.textContent = `${monthNames[month]} ${year}`;
+
+            // Add blank spaces
+            for (let i = 0; i < startingDay; i++) {
+                const blankDay = document.createElement('div');
+                blankDay.className = 'date';
+                daysContainer.appendChild(blankDay);
+            }
+
+            // Add days
+            for (let day = 1; day <= monthLength; day++) {
+                const dateDiv = document.createElement('div');
+                dateDiv.className = 'date';
+                dateDiv.textContent = day;
+                
+                const dateString = `${year}-${month + 1}-${day}`;
+                if (events[dateString] && events[dateString].length > 0) {
+                    dateDiv.classList.add('has-event');
+                }
+
+                if (day === currentDate.getDate() && 
+                    month === currentDate.getMonth() && 
+                    year === currentDate.getFullYear()) {
+                    dateDiv.classList.add('current');
+                }
+                
+                dateDiv.addEventListener('click', () => {
+                    selectedDate = `${year}-${month + 1}-${day}`;
+                    document.getElementById('selectedDateDisplay').textContent = 
+                        `${monthNames[month]} ${day}, ${year}`;
+                    showEvents(selectedDate);
+                });
+                
+                daysContainer.appendChild(dateDiv);
+            }
+        }
+
+        function addEvent() {
+            if (!selectedDate) {
+                alert('Please select a date first');
+                return;
+            }
+
+            const title = document.getElementById('eventTitle').value;
+            const description = document.getElementById('eventDescription').value;
+            const time = document.getElementById('eventTime').value;
+
+            if (!title) {
+                alert('Please enter an event title');
+                return;
+            }
+
+            if (!events[selectedDate]) {
+                events[selectedDate] = [];
+            }
+
+            events[selectedDate].push({
+                title,
+                description,
+                time,
+                id: Date.now()
+            });
+
+            localStorage.setItem('calendarEvents', JSON.stringify(events));
+            showEvents(selectedDate);
+            showCalendar(currentMonth, currentYear);
+
+            // Clear inputs
+            document.getElementById('eventTitle').value = '';
+            document.getElementById('eventDescription').value = '';
+            document.getElementById('eventTime').value = '';
+        }
+
+        function deleteEvent(dateStr, eventId) {
+            events[dateStr] = events[dateStr].filter(event => event.id !== eventId);
+            if (events[dateStr].length === 0) {
+                delete events[dateStr];
+            }
+            localStorage.setItem('calendarEvents', JSON.stringify(events));
+            showEvents(dateStr);
+            showCalendar(currentMonth, currentYear);
+        }
+
+        function showEvents(dateStr) {
+            const eventList = document.getElementById('eventList');
+            eventList.innerHTML = '';
+
+            if (!events[dateStr]) return;
+
+            events[dateStr].forEach(event => {
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'event-item';
+                eventDiv.innerHTML = `
+                    <div>
+                        <strong>${event.title}</strong>
+                        ${event.time ? `<br>${event.time}` : ''}
+                        ${event.description ? `<br>${event.description}` : ''}
+                    </div>
+                    <button class="delete-btn" onclick="deleteEvent('${dateStr}', ${event.id})">×</button>
+                `;
+                eventList.appendChild(eventDiv);
+            });
+        }
+
+        function previousMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            showCalendar(currentMonth, currentYear);
+        }
+
+        function nextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            showCalendar(currentMonth, currentYear);
+        }
+
+        // Initial calendar display
+        showCalendar(currentMonth, currentYear);
+    </script>
+</body>
+</html>
