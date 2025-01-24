@@ -17,3 +17,6 @@
 
 ## Contact
 <jsavill96@gmail.com>
+
+[Calendar](Calendar.html)
+
