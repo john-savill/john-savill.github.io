@@ -211,49 +211,5 @@
 </body>
 </html>
 
-date,title,description
-2024-01-01,New Year's Day,Happy New Year celebration
-2024-01-15,Meeting,Team status meeting
-
-This implementation includes:
-
-    A visual calendar display with month navigation
-    Ability to add events to specific dates
-    Event storage in a CSV file format
-    Basic styling for the calendar and events
-    A modal form for adding new events
-
-The CSV file structure should be:
-
-date,title,description
-2024-01-01,New Year's Day,Happy New Year celebration
-2024-01-15,Meeting,Team status meeting
-
-To use this calendar:
-
-    Create a file named events.csv in the same directory as your HTML file
-    Add the header row: date,title,description
-    Serve the files through a web server (due to browser security restrictions when loading local files)
-
-Features:
-
-    Click on any day to add a new event
-    Events are displayed as colored blocks in the calendar
-    Navigate between months using the Previous/Next buttons
-    Events are stored in a CSV file (Note: actual file saving would require server-side implementation)
-
-Limitations:
-
-    This is a client-side only implementation
-    Actual file saving would require server-side code (PHP, Node.js, etc.)
-    No file locking mechanisms (as requested)
-    No error handling (as requested)
-    No event editing or deletion (could be added if needed)
-
-To implement actual file saving, you would need to:
-
-    Set up a server (e.g., Node.js, PHP)
-    Create an endpoint to handle file writing
-    Modify the saveEvents() function to make an API call to your server
 
 This implementation provides a foundation that you can build upon based on your specific needs. 
