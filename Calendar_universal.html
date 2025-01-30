@@ -97,7 +97,7 @@
         // Load events from CSV file
         async function loadEvents() {
             try {
-                const response = await fetch('https://docs.google.com/spreadsheets/d/1SOQF4dmNxL2rAkC_cHL0Ja37Ve0oDm6lYjL7u5NWUgw/edit?usp=drive_link');
+                const response = await fetch('https://drive.google.com/file/d/1DK4D8cJKajmwRbh_iOJzXdq9xCar7WCA/view?usp=sharing');
                 const csvText = await response.text();
                 const rows = csvText.split('\n').slice(1); // Skip header row
                 events = rows.map(row => {
