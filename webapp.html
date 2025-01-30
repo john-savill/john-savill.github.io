@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Application</title>
+    <style>
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #pyapp {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Python Application</h1>
+        
+        <!-- Python application container -->
+        <iframe id="pyapp" src="your_python_app.html"></iframe>
+        
+        <!-- Reset button -->
+        <button class="button" onclick="resetApplication()">Reset Application</button>
+    </div>
+
+    <script>
+        function resetApplication() {
+            // Get the iframe element
+            const pyapp = document.getElementById('pyapp');
+            
+            // Reload the iframe content
+            pyapp.src = pyapp.src;
+        }
+    </script>
+</body>
+</html>
+
+
+To use this template, you'll need to:
+
+    Replace "your_python_app.html" with the actual path to your Python application. There are several ways to serve your Python application:
+
+    a. Using a Python web framework (like Flask):
+
+    from flask import Flask, render_template
+    app = Flask(__name__)
+
+    @app.route('/')
+    def index():
+        return render_template('your_python_app.html')
+
+    if __name__ == '__main__':
+        app.run()
+
+    Use code with caution
+
+b. Using PyScript (for running Python directly in the browser):
+
+<!-- your_python_app.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body>
+    <py-script>
+        # Your Python code here
+        print("Hello from Python!")
+    </py-script>
+</body>
+</html>
+
+Use code with caution
+
+    If you're using a Python web framework like Flask, Django, or FastAPI:
+        Set up your server properly
+        Configure the correct routes
+        Handle the reset functionality on the server-side if needed
+
+    If you're using PyScript:
+        Make sure to include the necessary PyScript dependencies
+        Your Python code will run directly in the browser
+        The reset button will reload the application state
+
+The reset button functionality uses JavaScript to reload the iframe content, effectively restarting your Python application. You can modify the resetApplication() function to include any additional reset logic specific to your application.
+
+Remember to:
+
+    Properly configure your web server to serve the Python application
+    Handle any necessary CORS (Cross-Origin Resource Sharing) settings
+    Implement proper error handling
+    Add any additional styling or functionality as needed for your specific use case
+
+This is a basic template that you can build upon based on your specific Python application requirements. 

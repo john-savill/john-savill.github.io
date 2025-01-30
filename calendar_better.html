@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Calendar</title>
+    <style>
+        .calendar {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background-color: #ddd;
+        }
+
+        .calendar-day {
+            background-color: white;
+            padding: 10px;
+            min-height: 80px;
+            cursor: pointer;
+        }
+
+        .calendar-day:hover {
+            background-color: #f5f5f5;
+        }
+
+        .event {
+            background-color: #4CAF50;
+            color: white;
+            padding: 2px 4px;
+            margin: 2px 0;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            width: 70%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar">
+        <div class="calendar-header">
+            <button onclick="previousMonth()">Previous</button>
+            <h2 id="currentMonth">January 2024</h2>
+            <button onclick="nextMonth()">Next</button>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+    </div>
+
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <h3>Add Event</h3>
+            <form id="eventForm">
+                <input type="hidden" id="selectedDate">
+                <label for="eventTitle">Event Title:</label><br>
+                <input type="text" id="eventTitle" required><br>
+                <label for="eventDescription">Description:</label><br>
+                <textarea id="eventDescription"></textarea><br>
+                <button type="submit">Save Event</button>
+                <button type="button" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentDate = new Date();
+        let events = [];
+
+        // Load events from CSV file
+        async function loadEvents() {
+            try {
+                const response = await fetch('events.csv');
+                const csvText = await response.text();
+                const rows = csvText.split('\n').slice(1); // Skip header row
+                events = rows.map(row => {
+                    const [date, title, description] = row.split(',');
+                    return { date, title, description };
+                });
+                renderCalendar();
+            } catch (error) {
+                console.error('Error loading events:', error);
+            }
+        }
+
+        // Save events to CSV file
+        async function saveEvents() {
+            const csvContent = 'date,title,description\n' + 
+                events.map(event => `${event.date},${event.title},${event.description}`).join('\n');
+            
+            // In a real implementation, you would need to implement server-side code to save the CSV file
+            console.log('Saving events:', csvContent);
+        }
+
+        function renderCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+
+            const monthYear = document.getElementById('currentMonth');
+            monthYear.textContent = currentDate.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+            // Add day headers
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            days.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.textContent = day;
+                dayHeader.style.textAlign = 'center';
+                dayHeader.style.fontWeight = 'bold';
+                dayHeader.style.backgroundColor = '#f0f0f0';
+                dayHeader.style.padding = '10px';
+                grid.appendChild(dayHeader);
+            });
+
+            // Add empty cells for days before the first day of the month
+            for (let i = 0; i < firstDay.getDay(); i++) {
+                grid.appendChild(document.createElement('div'));
+            }
+
+            // Add days and their events
+            for (let day = 1; day <= lastDay.getDate(); day++) {
+                const dayCell = document.createElement('div');
+                dayCell.className = 'calendar-day';
+                dayCell.innerHTML = day;
+
+                const dateStr = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                
+                // Add events for this day
+                const dayEvents = events.filter(event => event.date === dateStr);
+                dayEvents.forEach(event => {
+                    const eventDiv = document.createElement('div');
+                    eventDiv.className = 'event';
+                    eventDiv.textContent = event.title;
+                    dayCell.appendChild(eventDiv);
+                });
+
+                dayCell.onclick = () => openModal(dateStr);
+                grid.appendChild(dayCell);
+            }
+        }
+
+        function previousMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        }
+
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        }
+
+        function openModal(date) {
+            document.getElementById('selectedDate').value = date;
+            document.getElementById('eventTitle').value = '';
+            document.getElementById('eventDescription').value = '';
+            document.getElementById('eventModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('eventModal').style.display = 'none';
+        }
+
+        document.getElementById('eventForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            const newEvent = {
+                date: document.getElementById('selectedDate').value,
+                title: document.getElementById('eventTitle').value,
+                description: document.getElementById('eventDescription').value
+            };
+
+            events.push(newEvent);
+            saveEvents();
+            renderCalendar();
+            closeModal();
+        };
+
+        // Initial load
+        loadEvents();
+        renderCalendar();
+    </script>
+</body>
+</html>
+
+date,title,description
+2024-01-01,New Year's Day,Happy New Year celebration
+2024-01-15,Meeting,Team status meeting
+
+This implementation includes:
+
+    A visual calendar display with month navigation
+    Ability to add events to specific dates
+    Event storage in a CSV file format
+    Basic styling for the calendar and events
+    A modal form for adding new events
+
+The CSV file structure should be:
+
+date,title,description
+2024-01-01,New Year's Day,Happy New Year celebration
+2024-01-15,Meeting,Team status meeting
+
+To use this calendar:
+
+    Create a file named events.csv in the same directory as your HTML file
+    Add the header row: date,title,description
+    Serve the files through a web server (due to browser security restrictions when loading local files)
+
+Features:
+
+    Click on any day to add a new event
+    Events are displayed as colored blocks in the calendar
+    Navigate between months using the Previous/Next buttons
+    Events are stored in a CSV file (Note: actual file saving would require server-side implementation)
+
+Limitations:
+
+    This is a client-side only implementation
+    Actual file saving would require server-side code (PHP, Node.js, etc.)
+    No file locking mechanisms (as requested)
+    No error handling (as requested)
+    No event editing or deletion (could be added if needed)
+
+To implement actual file saving, you would need to:
+
+    Set up a server (e.g., Node.js, PHP)
+    Create an endpoint to handle file writing
+    Modify the saveEvents() function to make an API call to your server
+
+This implementation provides a foundation that you can build upon based on your specific needs. 
