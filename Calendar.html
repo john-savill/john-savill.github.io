@@ -126,6 +126,21 @@
         let selectedDate = null;
         let events = JSON.parse(localStorage.getItem('calendarEvents')) || {};
 
+        async function loadEvents() {
+            try {
+                const response = await fetch('https://drive.google.com/file/d/1DK4D8cJKajmwRbh_iOJzXdq9xCar7WCA/view?usp=sharing');
+                const csvText = await response.text();
+                const rows = csvText.split('\n').slice(1); // Skip header row
+                events = rows.map(row => {
+                    const [date, title, description] = row.split(',');
+                    return { date, title, description };
+                });
+                renderCalendar();
+            } catch (error) {
+                console.error('Error loading events:', error);
+            }
+        }
+
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"];
 
