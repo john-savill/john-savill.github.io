@@ -242,11 +242,6 @@
     // Rest of the functions remain the same (showCalendar, showEvents, previousMonth, nextMonth)
     // ... (keep the existing implementations)
 
-    // Modified initial load
-    window.onload = function() {
-        fetchEvents();
-    };
-
         function showCalendar(month, year) {
             const firstDay = new Date(year, month, 1);
             const lastDay = new Date(year, month + 1, 0);
@@ -337,6 +332,10 @@
             showCalendar(currentMonth, currentYear);
         }
 
+        // Modified initial load
+        window.onload = function() {
+            fetchEvents();
+        };
         // Initial calendar display
         showCalendar(currentMonth, currentYear);
     </script>
