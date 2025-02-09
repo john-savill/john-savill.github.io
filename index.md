@@ -22,5 +22,5 @@
 
 [Calendar](Calendar.html)
 
-[Web App](webapp.html)
+[Web App (WIP)](webapp.html)
 
