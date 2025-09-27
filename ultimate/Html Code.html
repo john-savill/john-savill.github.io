@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitLab CI/CD Pipeline - Glicko Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F1F2F1;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #FF6900;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #746660;
+            border-bottom: 2px solid #FF6900;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        .code-block {
+            background-color: #746660;
+            color: #FFFFFF;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            border-left: 4px solid #FF6900;
+        }
+        .note {
+            background-color: #D1C1CE;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #24A2D9;
+        }
+        .warning {
+            background-color: #FFE6CC;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #FF6900;
+        }
+        .highlight {
+            background-color: #24A2D9;
+            color: #FFFFFF;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+            color: #746660;
+        }
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #F1F2F1;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GitLab CI/CD Pipeline for Glicko Calculator</h1>
+        
+        <h2>Complete .gitlab-ci.yml Configuration</h2>
+        <div class="code-block">stages:
+  - build
+  - test
+  - deploy
+
+# Define common variables
+variables:
+  CC: gcc
+  CFLAGS: "-Wall -Wextra -std=c99 -O2"
+  EXECUTABLE: "glicko_calculator"
+  TEST_INPUT: "scores.csv"
+
+# Build stage
+build:
+  stage: build
+  image: gcc:latest
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq build-essential
+  script:
+    - echo "Building Glicko Calculator..."
+    - echo "Checking required files..."
+    - ls -la
+    - test -f glicko_calculator.c || (echo "ERROR: glicko_calculator.c not found" && exit 1)
+    - test -f glicko_calculator.h || (echo "ERROR: glicko_calculator.h not found" && exit 1)
+    - test -f scores.csv || (echo "ERROR: scores.csv not found" && exit 1)
+    - echo "Compiling..."
+    - $CC $CFLAGS -o $EXECUTABLE glicko_calculator.c -lm
+    - echo "Build completed successfully!"
+    - ls -la $EXECUTABLE
+    - file $EXECUTABLE
+  artifacts:
+    paths:
+      - $EXECUTABLE
+      - scores.csv
+    expire_in: 1 hour
+  only:
+    - main
+    - develop
+    - merge_requests
+
+# Static analysis
+static_analysis:
+  stage: test
+  image: gcc:latest
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq cppcheck
+  script:
+    - echo "Running static analysis..."
+    - cppcheck --enable=all --error-exitcode=1 --std=c99 glicko_calculator.c
+    - echo "Static analysis completed!"
+  allow_failure: true
+  only:
+    - main
+    - develop
+    - merge_requests
+
+# Memory leak detection
+memory_test:
+  stage: test
+  image: gcc:latest
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq valgrind
+  script:
+    - echo "Running memory leak detection..."
+    - $CC $CFLAGS -g -o ${EXECUTABLE}_debug glicko_calculator.c -lm
+    - valgrind --leak-check=full --error-exitcode=1 ./${EXECUTABLE}_debug
+    - echo "Memory test completed!"
+  dependencies:
+    - build
+  allow_failure: true
+  only:
+    - main
+    - develop
+    - merge_requests
+
+# Functional testing
+functional_test:
+  stage: test
+  image: gcc:latest
+  script:
+    - echo "Running functional tests..."
+    - echo "Testing executable exists and runs..."
+    - test -x $EXECUTABLE || (echo "ERROR: Executable not found or not executable" && exit 1)
+    - echo "Testing with sample data..."
+    - timeout 30 ./$EXECUTABLE
+    - echo "Functional test completed!"
+  dependencies:
+    - build
+  only:
+    - main
+    - develop
+    - merge_requests
+
+# Performance test
+performance_test:
+  stage: test
+  image: gcc:latest
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq time
+  script:
+    - echo "Running performance tests..."
+    - echo "Testing execution time..."
+    - /usr/bin/time -v ./$EXECUTABLE
+    - echo "Performance test completed!"
+  dependencies:
+    - build
+  allow_failure: true
+  only:
+    - main
+    - develop
+
+# Code coverage (if you have test cases)
+coverage:
+  stage: test
+  image: gcc:latest
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq gcov lcov
+  script:
+    - echo "Generating code coverage report..."
+    - $CC $CFLAGS --coverage -o ${EXECUTABLE}_coverage glicko_calculator.c -lm
+    - ./${EXECUTABLE}_coverage
+    - gcov glicko_calculator.c
+    - lcov --capture --directory . --output-file coverage.info
+    - lcov --remove coverage.info '/usr/*' --output-file coverage.info
+    - lcov --list coverage.info
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+    paths:
+      - coverage.info
+      - "*.gcov"
+    expire_in: 1 week
+  dependencies:
+    - build
+  allow_failure: true
+  only:
+    - main
+    - develop
+
+# Deploy stage (artifact storage)
+deploy:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - echo "Deploying artifacts..."
+    - mkdir -p dist/
+    - cp $EXECUTABLE dist/
+    - cp scores.csv dist/
+    - echo "Deployment completed!"
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 month
+  dependencies:
+    - build
+  only:
+    - main
+
+# Documentation generation
+documentation:
+  stage: deploy
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache doxygen graphviz
+  script:
+    - echo "Generating documentation..."
+    - doxygen -g
+    - echo "INPUT = glicko_calculator.c glicko_calculator.h" >> Doxyfile
+    - echo "OUTPUT_DIRECTORY = docs" >> Doxyfile
+    - doxygen
+    - echo "Documentation generated!"
+  artifacts:
+    paths:
+      - docs/
+    expire_in: 1 month
+  allow_failure: true
+  only:
+    - main</div>
+
+        <div class="section">
+            <h2>Pipeline Overview</h2>
+            <p>This GitLab CI/CD pipeline provides comprehensive <span class="highlight">build</span>, <span class="highlight">test</span>, and <span class="highlight">deployment</span> automation for your Glicko calculator C project.</p>
+        </div>
+
+        <div class="section">
+            <h2>Pipeline Stages</h2>
+            
+            <h3>🔨 Build Stage</h3>
+            <ul>
+                <li><strong>Compiler:</strong> GCC with C99 standard</li>
+                <li><strong>Flags:</strong> Wall, Wextra, O2 optimization</li>
+                <li><strong>Math Library:</strong> Links with -lm for math functions</li>
+                <li><strong>Validation:</strong> Checks for required files before compilation</li>
+            </ul>
+
+            <h3>🧪 Test Stage</h3>
+            <ul>
+                <li><strong>Static Analysis:</strong> Cppcheck for code quality</li>
+                <li><strong>Memory Testing:</strong> Valgrind for leak detection</li>
+                <li><strong>Functional Testing:</strong> Basic execution and timeout tests</li>
+                <li><strong>Performance Testing:</strong> Execution time measurement</li>
+                <li><strong>Code Coverage:</strong> GCOV/LCOV reporting</li>
+            </ul>
+
+            <h3>🚀 Deploy Stage</h3>
+            <ul>
+                <li><strong>Artifact Storage:</strong> Compiled executable and data files</li>
+                <li><strong>Documentation:</strong> Doxygen-generated docs</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Important Requirements:</strong>
+            <ul>
+                <li>Ensure <code>glicko_calculator.h</code> is in your repository</li>
+                <li>The <code>scores.csv</code> file must be present</li>
+                <li>Pipeline runs on main, develop branches and merge requests</li>
+            </ul>
+        </div>
+
+        <div class="note">
+            <strong>📝 Customization Options:</strong>
+            <ul>
+                <li>Modify compiler flags in the <code>variables</code> section</li>
+                <li>Add more test data files as needed</li>
+                <li>Adjust artifact expiration times</li>
+                <li>Enable/disable specific test stages with <code>allow_failure</code></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Usage Instructions</h2>
+            <ol>
+                <li>Save this configuration as <code>.gitlab-ci.yml</code> in your project root</li>
+                <li>Ensure all required files are committed to your repository</li>
+                <li>Push to trigger the pipeline</li>
+                <li>Monitor pipeline execution in GitLab CI/CD interface</li>
+                <li>Download artifacts from successful builds</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Expected Artifacts</h2>
+            <ul>
+                <li><strong>Executable:</strong> <code>glicko_calculator</code> binary</li>
+                <li><strong>Test Data:</strong> <code>scores.csv</code> file</li>
+                <li><strong>Coverage Reports:</strong> Code coverage analysis</li>
+                <li><strong>Documentation:</strong> Generated API docs</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
