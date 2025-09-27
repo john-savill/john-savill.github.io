@@ -2,6 +2,8 @@
 # John Savill 
 *A little detail about me written in simple markdown & HTML*
 
+This site contains details about my work experience, relevant skills and will have a running journal of some of the independent projects I have worked on/ am working on.
+
 ***
 
 ### Contents
@@ -13,7 +15,7 @@
 | [___Work Gallery___](rotategallery.html) | Project photos |
 | [___Sport Gallery___](rotatesportgallery.html) | Sport photos |
 | [___Wordpress Site___](https://johnsavillinfo.wordpress.com/) | Designed site |
-| ~~Design~~ | ~~Some art & design~~ |
+| Design | Some art & design, mostly digital designs for hobbies/ friends. |
 
 ## Contact
 <jsavill96@gmail.com>
