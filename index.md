@@ -14,7 +14,8 @@ This site contains details about my work experience, relevant skills and will ha
 | [___Sport___](https://john-savill.github.io/sports) | Sport achievements |
 | [___Work Gallery___](rotategallery.html) | Project photos |
 | [___Sport Gallery___](rotatesportgallery.html) | Sport photos |
-| [___Wordpress Site___](https://johnsavillinfo.wordpress.com/) | Designed site |
+| [___Wordpress Site___](https://johnsavillinfo.wordpress.com/) | Designed site, pretty much the same content in a better presentation |
+| Ultimate thoughts | An online ramble / mini-book on the sport |
 | Design | Some art & design, mostly digital designs for hobbies/ friends. |
 
 ## Contact
