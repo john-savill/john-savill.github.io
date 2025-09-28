@@ -20,4 +20,3 @@ In 2023 I joined the London-based mixed team, Deep Space, and won the UK Nationa
 
 I have also contributed back to the community by coaching universities and clubs. In 2021 I coached the UEA Ultimate team an in 2024 I coached the Cambridge University ultimate team.
 
-

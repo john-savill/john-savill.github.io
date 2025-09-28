@@ -100,14 +100,12 @@ Then just run the executable with the "scores.csv" in the same directory to run 
 ```
 ./glicko_calculator
 ```
-### And if you're interested...
+### Futher work...
 
-I have been doing a fair bit of CI/CD and have created a .yml for builing, testing, and deploying the code, whilst describing the process. This isn't relevant to the actual glicko ranking application itself, just making it be system agnostic.
+Currently it jsut exists as this C application. There are a few different ways I could see improving this for release
 
-The .yml will build the code, validate it, then containerise it. I've addewd a python script that also runs and uses the .yml to create a plantUML activity diagram. 
-
-This just means that updates to the code can be tested automatically and any enhancements/ other functions (like game prediction, front-end input api, accounting for other metrics) can be added and tested automatically.
-
-At the moment the .yml just tests the functionality of the file, not the algorithm itself.
+ - Make into a runnable application. I am familiar with GTK so would use that. A bit overkill for something so simple.
+ - upload to a Gitlab for continual development. Would enable CI/CD with a .yaml that would run the program with a new code update or new .csv committed.
+ - Host on a webiste. I'm not as familiar with website code/ hosting (as you can see with this al being markdown and really basic html) so I'm less inclined to do this unless I have a lot of sare time.
 
 
