@@ -22,7 +22,7 @@ This site contains details about my work experience, relevant skills and will ha
 
 [Basic Calendar](Calendar.html)
 
-[Python Web App (WIP)](webapp.html)
+[Python Web App](webapp.html) (Currently does nothing, may get around to doing something with it)
 
 ## Contact
 <jsavill96@gmail.com>
