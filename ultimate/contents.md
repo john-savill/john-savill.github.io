@@ -35,3 +35,4 @@ I try to cover a wide range of topics with some expertise and and explanation bu
 
 And, it should be obvious, but this has been written in Markdown with no spell checking, so the formatting will be basic and the spelling will likely be incorrect at times.
 
+WIP as of OCT 2025.
