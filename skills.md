@@ -6,17 +6,18 @@
 
 ### Hard/Technical skills:
 
-+ Embedded C – 3 years experience in functional development for engine control units.
-+ C, C++ – Experience in a number of research projects for small applications.
++ Embedded C – 3+ years experience in functional development for engine control units.
++ C, C++ – Experience in a number of research projects for small applications, some advanced driver assistance functionality.
 + Python – Used in research and development projects for quick, interactive, function execution.
++ HTML + just a little HTML experience for basic web-based applications.
 + AGILE project methodology – Used in most customer-facing projects to continually produce quality deliverables.
 + Project task management with  JIRA – Experience managing project tasks in a small team with JIRA.
-+ Version control with GIT and Subversion – TortoiseSVN used for collaborative software development and concurrent functionality on separate branches.
-+ GITLAB CI/CD – Experience in continuous integration and delivery across different platforms using GITLAB.
++ Version control with GIT and Subversion – TortoiseSVN used for collaborative software development and concurrent functionality on separate branches. GIT commands and repo management.
++ GITLAB CI/CD – Experience in continuous integration and delivery across different platforms using GITLAB. I am very familiar writing .yaml files to include thorough testing and deployment.
 + Markdown – In report writing, guide explanations and general everyday logging.
 + Assembly – low level programming and debugging.
 + LINUX – Experience in Linux development environment.
-+ Docker – Deploying Docker container interactive applications on a range of hardware.
++ Docker – Building Docker containers, deploying Docker container interactive applications on a range of hardware, and managing the containers.
 
 ### Soft skills
 
