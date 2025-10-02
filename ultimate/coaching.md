@@ -4,3 +4,7 @@ I have spent a few years coaching/ helping coach various University and club tea
 
 I'm pertty sure I am not a good coach, in the way that I convey ideas and inspire players but I think I can make some points on good coaching principles.
 
+### Role / Tasks
+
+### Communication
+
