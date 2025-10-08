@@ -16,4 +16,8 @@ This example gym plan and example use is something I have used and can attest to
 
 ### Nutrition
 
+
+
 ### Warm-ups and cool downs
+
+

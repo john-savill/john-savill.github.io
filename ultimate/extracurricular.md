@@ -4,6 +4,8 @@ You can make all the correct tactical decisions, have the best players, and trai
 
 ### Culture / Mentality
 
-### What to push
+
+
+### What to push, what to innovate on
 
 

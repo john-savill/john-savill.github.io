@@ -28,3 +28,12 @@ Having multiple roles to organise a club are a benfit in the following ways:
  4. interfacing: Instead of having a committee "blob", players will find it easier going to a specific person with questions, concerns or feedback. Otherwise communications and input will get lost and ignored.
 
 A club doesn't need some elaborate JIRA board for managing tasks and delegating jobs but some committee level management will make a club vastly more efficient.
+
+### Communication
+
+
+
+### Feedback, using the team
+
+
+
