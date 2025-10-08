@@ -13,7 +13,7 @@
 + AGILE project methodology – Used in most customer-facing projects to continually produce quality deliverables.
 + Project task management with  JIRA – Experience managing project tasks in a small team with JIRA.
 + Version control with GIT and Subversion – TortoiseSVN used for collaborative software development and concurrent functionality on separate branches. GIT commands and repo management.
-+ GITLAB CI/CD – Experience in continuous integration and delivery across different platforms using GITLAB. I am very familiar writing .yaml files to include thorough testing and deployment.
++ GITLAB CI/CD – Experience in continuous integration and delivery across different platforms using GITLAB. I am very familiar writing .yaml files to include thorough testing and deployment. Also, setting up runners to run the action flow.
 + Markdown – In report writing, guide explanations and general everyday logging.
 + Assembly – low level programming and debugging.
 + LINUX – Experience in Linux development environment.
@@ -26,9 +26,10 @@
 + Influence over people and project decisions.
 + Requirements Derivation in conjunction with a customer. Being able to define specific functional/ logical requirements from a customer’s description is key to achieving accurate work.
 + AI prompting for clarification and improved workflow. I have worked with an internally defined AI to help expedite tasks.
++ Presentation skills, conveying ideas clearly
 + Customer Relations and communication to maintain a good working relationship.
 + Unit Testing of produced code. Experience self-testing code to ensure reliability.
 + Adaptability to work on multiple different projects, of differing scopes, at the same time.
 + Peer Reviewing documents and code with constructive feedback.
-+ Efficient and planned work to make the best use of time available
++ Efficient and planned work to make the best use of time available.
 

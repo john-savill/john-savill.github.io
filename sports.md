@@ -14,9 +14,9 @@ When I started at Loughborough University I found the Ultimate Frisbee club. I h
 
 ![Ultimate_1](https://john-savill.github.io/Media/space4.jpg "European Championships Semi Final 2023")
 
-In 2023 I joined  and competed with the London-based mixed team, Deep Space. This involved multiple trainings a week throughout the season (Feb-Oct) and atending tournaments around the UK and abroad. We won the UK National Championship and the European Championship in Wroclaw (both a fst for the club).
+In 2023 I joined  and competed with the London-based mixed team, Deep Space. This involved multiple trainings a week throughout the season (Feb-Oct) and atending tournaments around the UK and abroad. We won the UK National Championship and the European Championship in Wroclaw (both a first for the club). We also won the 'spirit-of-the-game' medal in the mixed division at the European Championships, which is a measure of the teams attitude and fair-mindedness.
 
-Again, in 2024 we won the UK National Championship and the European Championship in Brussels.
+Again, in 2024 I competed. We compteted at tournaments in London, Birmingham, Padova, Reading, Leuven, Nottingham and Brussels. This year we won the UK Regional Championship, went on to win the UK National Championship and the European Championship in Brussels, going back-to-back both nationally and on the continent.
 
 I became a GLL sponsored athlete in early 2025.
 

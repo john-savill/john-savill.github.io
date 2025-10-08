@@ -28,6 +28,8 @@ The project was a success, the European Commission praised it for being such a w
 
 Personally, I gained experience in working in a large, dispersed project group, managing work schedules, deliverable writing, CI/CD development, containerisation, cybersecurity, advanced driver assistance systems and complex system architectures.
 
-SDV project
+The third project is an internal R&D project focussed on Software Defined Vehicle development. For this project I have become even more familiar with GitLab pipeline workflows and developing a SDV platform. I have needed to create a Scenario for the CARLA simulator to verify the developed SDV and sophisticated perception interface.
 
-CERTAIN project
+The Fourth project is another European-scope research project which has begun inlate 2025. It is a continuation of the [SYNERGIES project](https://synergies-ccam.eu/) and involves scenario based ADAS validation and caetgorisation.
+
+---
