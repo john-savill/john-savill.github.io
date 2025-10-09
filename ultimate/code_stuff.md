@@ -27,6 +27,10 @@ A small note on the adavantages over standard ELO:
 
 Again, I won't go into too much detail, and will just give an overview. There's a few comments dotted about the code and C is fairly understandable.
 
+The code is defined in this [repo](/ultimate) with the C code [glicko_calculator.c](/ultimate/glicko_calculator.c) and C header [glicko_calculator.h](/ultimate/glicko_calculator.h).
+
+The example input [scores.csv](/ultimate/scores.csv) file is aslo committed here.
+
 The definitions of system limits and initial variables are defined in the header file. This is probably the only thing you'd want to change.
 
 The structures, variables and functions are also included here, in case you were wanted to add to the logic in any way and call the individual functions from another file. The player struct stores player name, rating, rating deviation (RD), volatility, and games played, the Game struct represents a game between two teams of 3 players, each with scores.
@@ -107,5 +111,6 @@ Currently it jsut exists as this C application. There are a few different ways I
  - Make into a runnable application. I am familiar with GTK so would use that. A bit overkill for something so simple.
  - upload to a Gitlab for continual development. Would enable CI/CD with a .yaml that would run the program with a new code update or new .csv committed.
  - Host on a webiste. I'm not as familiar with website code/ hosting (as you can see with this al being markdown and really basic html) so I'm less inclined to do this unless I have a lot of sare time.
+
 
 
