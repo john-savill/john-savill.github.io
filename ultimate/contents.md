@@ -1,5 +1,5 @@
 ***
-## Ultiamte
+## Ultimate
 // Notes, strategies, algorithms, and plans to get the most out of an ultiamte club / team
 
 ***
