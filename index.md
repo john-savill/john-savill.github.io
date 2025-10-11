@@ -1,8 +1,10 @@
 
 # John Savill 
-*A little detail about me written in simple markdown & HTML*
+*A little detail about me written in simple markdown & some HTML*
 
 This site contains details about my work experience, relevant skills and public projects I have participated in. There is alos some detail on my hobbies and other interests.
+
+I'm not too familiar with web development so I've stuck with MD for most pages, the galleries are HTML.
 
 ***
 
