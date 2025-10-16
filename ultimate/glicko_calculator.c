@@ -256,12 +256,12 @@ void read_csv_file(const char *filename) {
     }
     
     fclose(file);
-    printf("✅ Successfully loaded %d games from %s\n\n", num_games, filename);
+    printf("Successfully loaded %d games from %s\n\n", num_games, filename);
 }
 
 // Rating display with scoring stats
 void print_ratings() {
-    printf("\n🏆 FINAL PLAYER RATINGS (Glicko System)\n");
+    printf("\nFINAL PLAYER RATINGS (Glicko System)\n");
     printf("================================================\n");
     printf("%-20s %8s %8s %10s %6s %8s\n", 
            "|Player|", "|Rating|", "|RD|", "|Volatility|", "|Games|", "|Avg. score contribution per game|");

@@ -66,12 +66,12 @@ Running the final executable should return somehting similar to the following (b
 Glicko Rating Calculator
 ====================================
 
-✅ Successfully loaded 5 games from scores.csv
+Successfully loaded 5 games from scores.csv
 
 Processing 5 games with 8 players...
 
 
-🏆 FINAL PLAYER RATINGS (Glicko System)
+FINAL PLAYER RATINGS (Glicko System)
 ================================================
 |Player|             |Rating|     |RD| |Volatility| |Games| |Contribution Score per game|
 ------------------------------------------------

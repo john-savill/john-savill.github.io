@@ -2830,44 +2830,47 @@ input, select, textarea {
 				width: 60%;
 			}
 
-			.tiles article:nth-child(10n - 9):before {
+			.tiles article:nth-child(11n - 10):before {
 				background-color: #6fc3df;
 			}
 
-			.tiles article:nth-child(10n - 8):before {
+			.tiles article:nth-child(11n - 9):before {
 				background-color: #8d82c4;
 			}
 
-			.tiles article:nth-child(10n - 7):before {
+			.tiles article:nth-child(11n - 8):before {
 				background-color: #ec8d81;
 			}
 
-			.tiles article:nth-child(10n - 6):before {
+			.tiles article:nth-child(11n - 7):before {
 				background-color: #e7b788;
 			}
 
-			.tiles article:nth-child(10n - 5):before {
+			.tiles article:nth-child(11n - 6):before {
 				background-color: #929292;
 			}
 
-			.tiles article:nth-child(10n - 4):before {
+			.tiles article:nth-child(11n - 5):before {
 				background-color: #87c5a4;
 			}
 
-			.tiles article:nth-child(10n - 3):before {
+			.tiles article:nth-child(11n - 4):before {
 				background-color: #ca71c6;
 			}
 
-			.tiles article:nth-child(10n - 2):before {
+			.tiles article:nth-child(11n - 3):before {
 				background-color: #cfce70;
 			}
 
-			.tiles article:nth-child(10n - 1):before {
+			.tiles article:nth-child(11n - 2):before {
 				background-color: #8ea9e8;
 			}
 
-			.tiles article:nth-child(10n):before {
+			.tiles article:nth-child(11n - 1):before {
 				background-color: #974c4c;
+			}
+			.tiles article:nth-child(11n):before {
+				background-color: #2f5e29;
 			}
 
 		@media screen and (max-width: 1280px) {
