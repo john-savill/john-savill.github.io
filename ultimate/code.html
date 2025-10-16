@@ -1,0 +1,180 @@
+<h1 id="some-thoughts">Some thoughts</h1>
+<p>Listening to how Jake Smart used an algorithmic approach to determine
+    the best handler dominator setup from the Brown University team of
+    2020's sounded interesting.</p>
+<p>I have had some experience using rating algorithms, uisng Glicko(V2)
+    on a little side project to rate <strong>very</strong> amateur tennis
+    players and predict matches, just a fun thing for some friends.</p>
+<p>I work as a software engineer so i'd have a go at creating something
+    similar to Jake Smart's application, using the glicko alorithm.</p>
+<h2 id="glicko">Glicko</h2>
+<p>I won't go into detail about the Glicko algorithm itself, it's well
+    <a href="https://www.glicko.net/glicko.html">documented</a> and, if
+    you're that curious, any reasearch you will do will be much more useful
+    than my explanation.
+</p>
+<p>Initial ratings are needed before any of the game/score analysis is
+    done, this default is usually 1500.</p>
+<p>After each game algorithm analyzes the outcome and updates the rating
+    of the players involved. Also updated is the rating deviation (RD),
+    which is a measure of confidence in the rating, depending on the number
+    of games and recency. In this application case we calculate team average
+    ratings when processing scores. If a player has a higer RD their rating
+    will change more dramatically after each game processed.</p>
+<p>The volatility of each player represents the degree of expected
+    fluctuation. The volatility is low if the player performs consistently
+    but will be higher if the player has eratic results.</p>
+<p>The ratings for players are updated after every game.</p>
+<p>A small note on the adavantages over standard ELO: - You get more
+    accurate ratings with the inclusion of RD. It provides a more accurate
+    representation of a player's skill, especially for players with limited
+    game history or who haven't played recently. - Glicko handles
+    Inactivity. The RD helps to account for inactivity, meaning a player's
+    rating won't be as drastically affected by a period of inactivity
+    compared to Elo. - Glicko's system is generally better at predicting
+    game outcomes than Elo, but that is somehting that isn't added, yet…</p>
+<h2 id="code-explanation">Code explanation</h2>
+<p>Again, I won't go into too much detail, and will just give an
+    overview. There's a few comments dotted about the code and C is fairly
+    understandable.</p>
+<p>The code is defined in this <a href="/ultimate">repo</a> with the C
+    code <a href="/ultimate/glicko_calculator.c">glicko_calculator.c</a> and
+    C header <a href="/ultimate/glicko_calculator.h">glicko_calculator.h</a>.</p>
+<p>The example input <a href="/ultimate/scores.csv">scores.csv</a> file
+    is aslo committed here.</p>
+<p>The definitions of system limits and initial variables are defined in
+    the header file. This is probably the only thing you'd want to
+    change.</p>
+<p>The structures, variables and functions are also included here, in
+    case you were wanted to add to the logic in any way and call the
+    individual functions from another file. The player struct stores player
+    name, rating, rating deviation (RD), volatility, and games played, the
+    Game struct represents a game between two teams of 3 players, each with
+    scores.</p>
+<p>Each function is described in the table below</p>
+<table>
+    <colgroup>
+        <col style="width: 50%" />
+        <col style="width: 50%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>main()</td>
+            <td>Overall reads data from CSV, processes games, prints ratings</td>
+        </tr>
+        <tr>
+            <td>find_player_index()</td>
+            <td>Searches for a player by name</td>
+        </tr>
+        <tr>
+            <td>add_player()</td>
+            <td>Creates a new player with default ratings</td>
+        </tr>
+        <tr>
+            <td>update_glicko_rating()</td>
+            <td>Core algorithm for updating player ratings</td>
+        </tr>
+        <tr>
+            <td>process_game()</td>
+            <td>Processes game results and updates all players' ratings</td>
+        </tr>
+        <tr>
+            <td>read_csv_file()</td>
+            <td>Parses game data from CSV files</td>
+        </tr>
+        <tr>
+            <td>print_ratings()</td>
+            <td>Outputs sorted player ratings</td>
+        </tr>
+        <tr>
+            <td>g_function()</td>
+            <td>Helper functions for the Glicko algorithm</td>
+        </tr>
+        <tr>
+            <td>E_function()</td>
+            <td>Helper functions for the Glicko algorithm</td>
+        </tr>
+        <tr>
+            <td>calculate_score_margin_factor()</td>
+            <td>Simply handles if the game was close or a blowout</td>
+        </tr>
+        <tr>
+            <td>calculate_game_outcome()</td>
+            <td>Win/lose calculation based on exact scores</td>
+        </tr>
+        <tr>
+            <td>calculate_team_stats()</td>
+            <td>Calculate team average rating and RD, for per-game processing</td>
+        </tr>
+    </tbody>
+</table>
+<p>The process_game() function specifically: - Calculates average team
+    ratings and rating deviations - Determines game outcome (win/loss/draw)
+    - Updates each player's rating based on team performance - Uses the
+    Glicko algorithm to calculate rating changes</p>
+<p>Obviously we are handling 3 players competing on each team with each
+    player's rating updated based on the outcome of the game and the
+    strength of the opposing team.</p>
+<p>Running the final executable should return somehting similar to the
+    following (based off the example scores.csv)</p>
+<pre><code>Glicko Rating Calculator
+====================================
+
+Successfully loaded 5 games from scores.csv
+
+Processing 5 games with 8 players...
+
+
+FINAL PLAYER RATINGS (Glicko System)
+================================================
+|Player|             |Rating|     |RD| |Volatility| |Games| |Contribution Score per game|
+------------------------------------------------
+blvaro                   1578     54.6      0.057      5      1.5
+clvaro                   1555     61.1      0.057      5      1.3
+glvaro                   1539     69.1      0.059      2      1.7
+alvaro                   1498     69.4      0.058      4      0.8
+dlvaro                   1474     56.2      0.058      4      1.0
+hlvaro                   1473     72.5      0.059      1      0.7
+flvaro                   1458     60.2      0.058      4      0.8
+elvaro                   1419     51.8      0.057      5      0.7</code></pre>
+<h2 id="limitations">Limitations</h2>
+<p>I have added the scores.csv used for testing. Obviously the code
+    expects the scores for each 3v3 game to be in the same format, but it is
+    a .csv file it is reading so it easy enough to edit and add rows for
+    each set of games/scores.</p>
+<p>There are system limits defined in the header but these can be
+    changed.</p>
+<p>We are limited to 3v3 games with no accountability for specific game
+    time. So although number of games is taken into account the actual time
+    between games isn't.</p>
+<p>Ultimate speicific parts of a games score, i.e breaks, are not used
+    in calculating players rating. Who started on offence isn't recorded
+    either, which can make a difference in low-scoring 3v3 games. It's just
+    a cold, rating calculating algorithm that doesn't represent actual
+    player skill.</p>
+<h2 id="building-using">Building/ Using</h2>
+<p>Trustworthy people can just download the C code and header files and
+    build it using a compiler themselves</p>
+<pre><code>gcc -o glicko_calculator glicko_calculator.c -lm</code></pre>
+<p>Then just run the executable with the “scores.csv” in the same
+    directory to run the analysis and return the ratings.</p>
+<pre><code>./glicko_calculator</code></pre>
+<h3 id="futher-work">Futher work…</h3>
+<p>Currently it jsut exists as this C application. There are a few
+    different ways I could see improving this for release</p>
+<ul>
+    <li>Make into a runnable application. I am familiar with GTK so would
+        use that. A bit overkill for something so simple.</li>
+    <li>upload to a Gitlab for continual development. Would enable CI/CD
+        with a .yaml that would run the program with a new code update or new
+        .csv committed.</li>
+    <li>Host on a webiste. I'm not as familiar with website code/ hosting
+        (as you can see with this al being markdown and really basic html) so
+        I'm less inclined to do this unless I have a lot of sare time.</li>
+</ul>
