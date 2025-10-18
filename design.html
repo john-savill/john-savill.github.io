@@ -2,109 +2,6 @@
 <html>
 
 <head>
-
-	<style>
-		/* The Image */
-		div.img img {
-			width: 100%;
-			height: auto;
-			cursor: pointer;
-		}
-
-		/* Add Responsiveness */
-		.responsive {
-			padding: 0 6px;
-			float: left;
-			width: 100%;
-		}
-
-		/* The Modal (background) */
-		.modal {
-			display: none;
-			/* Hidden by default */
-			position: fixed;
-			/* Stay in place */
-			z-index: 1;
-			/* Sit on top */
-			padding-top: 100px;
-			/* Location of the box */
-			left: 0;
-			top: 0;
-			width: 100%;
-			/* Full width */
-			height: 100%;
-			/* Full height */
-			overflow: auto;
-			/* Enable scroll if needed */
-			background-color: rgb(0, 0, 0);
-			/* Fallback color */
-			background-color: rgba(0, 0, 0, 0.9);
-			/* Black w/ opacity */
-		}
-
-		/* Modal Content (image) */
-		.modal-content {
-			margin: auto;
-			display: block;
-			width: 80%;
-			max-width: 700px;
-		}
-
-		/* Add Animation */
-		.modal-content,
-		#caption {
-			-webkit-animation-name: zoom;
-			-webkit-animation-duration: 0.6s;
-			animation-name: zoom;
-			animation-duration: 0.6s;
-		}
-
-		@-webkit-keyframes zoom {
-			from {
-				transform: scale(0)
-			}
-
-			to {
-				transform: scale(1)
-			}
-		}
-
-		@keyframes zoom {
-			from {
-				transform: scale(0.1)
-			}
-
-			to {
-				transform: scale(1)
-			}
-		}
-
-		/* The Close Button */
-		.close {
-			position: absolute;
-			top: 15px;
-			right: 35px;
-			color: #f1f1f1;
-			font-size: 40px;
-			font-weight: bold;
-			transition: 0.3s;
-		}
-
-		.close:hover,
-		.close:focus {
-			color: #bbb;
-			text-decoration: none;
-			cursor: pointer;
-		}
-
-		/* Clear Floats */
-		.clearfix:after {
-			content: "";
-			display: table;
-			clear: both;
-		}
-	</style>
-
 	<title>John - Design</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -159,18 +56,10 @@
 			<section id="one">
 				<div class="inner">
 					<h1>Digital Design</h1>
-					<!--<p> Posters, logos, and shirt designs I have made for sports teams </p>-->
+					<!--<p> Posters, logos, and shirt designs I have made for sports teams </p>-->					
 					<div class="box alt">
 						<div class="row gtr-50 gtr-uniform">
-							<div class="col-4">
-								<span class="image fit">
-									<!-- This doesn't work atm-->
-									<div class="responsive">
-										<div class="img">
-											<img src="Media/designfm1.png" alt="" />
-										</div>
-									</div>
-								</span>
+							<div class="col-4"><span class="image fit"><img src="Media/designfm1.png" alt="" /></span>
 							</div>
 							<div class="col-4"><span class="image fit"><img src="Media/designfm2.png" alt="" /></span>
 							</div>
@@ -248,32 +137,6 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
-
-	<script>
-		// Get the modal
-		var modal = document.getElementById('myModal');
-
-		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close")[0];
-
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function () {
-			modal.style.display = "none";
-		}
-
-		// Get all images and insert the clicked image inside the modal
-		// Get the content of the image description and insert it inside the modal image caption
-		var images = document.getElementsByTagName('img');
-		var modalImg = document.getElementById("img01");
-		var i;
-		for (i = 0; i < images.length; i++) {
-			images[i].onclick = function () {
-				modal.style.display = "block";
-				modalImg.src = this.src;
-				modalImg.alt = this.alt;
-			}
-		}
-	</script>
 
 </body>
 
