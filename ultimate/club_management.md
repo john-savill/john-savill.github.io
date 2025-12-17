@@ -31,9 +31,24 @@ A club doesn't need some elaborate JIRA board for managing tasks and delegating 
 
 ### Communication
 
+Communication is key between a leadership group and the club itself. 
+
+The leadership team must make sure they are able to efficiently communicate together. Anytime an issue is raised or a task needs to be completed there needs to be an understanding who is going to take the task and some sort of documented trail what has happened. 
+
+Relaying important information to the club/team should happen often. E-mail works best for general notifications as it can be easily searched through and doesn't require learning/loading different apps. Useful for overall monthly communication 
+
+Apps like spond/discord or anything similar are useful for making threads for individual tranings/topics and subdividing groups for more specific information.
 
 
 ### Feedback, using the team
 
+It can vary from club to team but it is very likely that the overall experience outside of the core leadership team will outweigh the experience in the team, sometimes by up to 5x more. 
 
+For this reason feedback should be a two-way flow of information.
+
+General, informal feedback for the club/ team can be shared at trainings. This should be non-specific to a single person and team-wide.
+
+Small, actionable feedback should be provided to individual players during trainings/ in-between games at tournaments. It has to be tangible, qunatifiable.
+
+Club coaches/ captains and designated leadership should keep detailed notes for feedback for individual players. Preferably the feedback should be actionable, something to work on outside of trainings, and just a few key notes at a time. It helps to frame the feedback constructively, encouraging good aspects and suggesting alternatives for negative aspects of a players game/ training/ mentality. Complement sandwich. 
 
