@@ -180,8 +180,8 @@
 
 		const dots = document.querySelectorAll('.dot');
 
-		// Auto rotate every 5 seconds
-		let autoRotate = setInterval(nextSlide, 5000);
+		// Auto rotate every 7 seconds
+		let autoRotate = setInterval(nextSlide, 7000);
 
 		function updateDots() {
 			dots.forEach(dot => dot.classList.remove('active'));
@@ -241,7 +241,7 @@
 		// Reset auto-rotation when user interacts with the gallery
 		gallery.addEventListener('mouseenter', () => clearInterval(autoRotate));
 		gallery.addEventListener('mouseleave', () => {
-			autoRotate = setInterval(nextSlide, 5000);
+			autoRotate = setInterval(nextSlide, 7000);
 		});
 	</script>
 </body>
